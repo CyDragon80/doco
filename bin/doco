@@ -1,5 +1,9 @@
 #!/usr/env/node
 
+// NOTE: You cannot (typically) run this file directly in Windows.
+// For Windows, you may need to pass this file to node.exe
+// See 'doco_win.bat' for scripting ideas for Windows.
+
 var path = require("path"),
     fs = require("fs"),
     ascli = require("ascli"),
@@ -9,6 +13,10 @@ var path = require("path"),
     argv = ascli.argv,
     pkg = require("../package.json");
 
+// Workaround issue based on luileito's report
+// https://github.com/dcodeIO/doco/issues/2
+if (opt == undefined) opt = app.opt;
+if (argv == undefined) argv = app.argv;
 
 if (argv.length < 1) {
     ascli.banner("doco".green.bold, pkg.version);
